@@ -3,3 +3,12 @@ deployment:
     tasks:
         - export DEPLOYPATH=/home/gerompdy/public_html/
         - /bin/cp index.html $DEPLOYPATH
+        - /bin/cp about.css $DEPLOYPATH
+        - /bin/cp cv.css $DEPLOYPATH
+        - /bin/cp cv.html $DEPLOYPATH
+        - /bin/cp game.css $DEPLOYPATH
+        - /bin/cp game.js $DEPLOYPATH
+        - /bin/cp main.css $DEPLOYPATH
+        - /bin/cp menu.css $DEPLOYPATH
+        - /bin/cp prof.jpg $DEPLOYPATH
+        - /bin/cp work.html $DEPLOYPATH

@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(
+            300deg,
+            rgba(15, 156, 145, 0.438) 0 20%,
+            transparent 20%
+        ),
+        linear-gradient(127deg, rgba(255, 0, 0, 0.171) 0 12%, transparent 12%);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 4px;
+    width: 80%;
+    margin: auto;
+    margin: 25px auto;
+    grid-template-areas:
+        "photo name name"
+        "contact work work"
+        "short work work"
+        "short education education";
+
+    /* This is for development only */
+    width: 210mm;
+    height: 297mm;
+}
+
+section {
+    background-color: #fff;
+    border: 2px solid #dddddd;
+    padding: 10px;
+}
+
+.photo {
+    grid-area: photo;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.portrait {
+    border-radius: 50%;
+    width: 195px;
+    height: 195px;
+}
+
+.name {
+    grid-area: name;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+h1 {
+    font-size: 2em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.last-name {
+    font-size: 2em;
+    width: 100%;
+}
+
+.short {
+    grid-area: short;
+}
+
+.contact {
+    grid-area: contact;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-list-item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.contact-list-item span {
+    font-weight: bold;
+}
+
+.work {
+    grid-area: work;
+}
+
+.education {
+    grid-area: education;
+}

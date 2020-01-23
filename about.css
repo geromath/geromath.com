@@ -1,0 +1,26 @@
+.content {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+        "name name filler1"
+        "filler2 filler2 short"
+        "filler3 about filler4"
+        "filler3 about filler4";
+    padding: 0;
+    margin: 0;
+}
+
+.name {
+    grid-area: name;
+}
+
+.short {
+    grid-area: short;
+}
+
+.about {
+    grid-area: about;
+}
