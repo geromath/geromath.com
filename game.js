@@ -1,17 +1,20 @@
+import { collisionDetection } from './physics.js';
+
 let character;
 let mainLevel;
 
 function main() {
     gameArea.start();
     character = new characterCreator(10, 250);
-    mainLevel = new levelCreator(0);
+    levelCreator.start();
+    collisionDetection.start(levelCreator);
 }
 
 function updateGameArea() {
     gameArea.clear();
     characterController();
     character.update();
-    mainLevel.update();
+    levelCreator.update();
 }
 
 let gameArea = {
@@ -42,6 +45,8 @@ function characterCreator(x, y) {
     this.isAirborne = false;
     this.isRunning = false;
     this.hasJumped = false;
+    this.collided = false;
+    this.collisionDetection = collisionDetection.applyColliosionDetection(this);
     this.speed = 12;
     this.originalSpeed = this.speed;
     this.jumpHeight = 36;
@@ -63,16 +68,16 @@ function characterCreator(x, y) {
             this.friction = 1.5;
         }
 
-        if (canMove(this)) {
+        if (!this.collided) {
             this.x += this.force;
         }
         applyGravity(this);
         groundCheck(this);
 
         // GRAPHICS
-        context = gameArea.context;
-        context.fillStyle = "red";
-        context.fillRect(this.x, this.y, this.width, this.height);
+        this.context = gameArea.context;
+        this.context.fillStyle = "red";
+        this.context.fillRect(this.x, this.y, this.width, this.height);
     };
 }
 
@@ -87,28 +92,30 @@ let level = [
     [0, 0, 0, 0, 0, 1, 1, 1, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
-function levelCreator(l) {
-    for (a in level) {
-        for (b in level[a]) {
-            if (level[a][b] === 1) {
-                let block = new blockCreator(
-                    gameArea.canvas.width / level[0].length * b, 
-                    gameArea.canvas.height / level.length * a, 
-                    gameArea.canvas.width / level[0].length, 
-                    gameArea.canvas.height / level.length);
-                level[a][b] = block;
-            } else {
-                level[a][b] = new blockCreator(0, 0, 0, 0);
+let levelCreator = {
+    start: function() {
+        for (let a in level) {
+            for (let b in level[a]) {
+                if (level[a][b] === 1) {
+                    let block = new blockCreator(
+                        gameArea.canvas.width / level[0].length * b, 
+                        gameArea.canvas.height / level.length * a, 
+                        gameArea.canvas.width / level[0].length, 
+                        gameArea.canvas.height / level.length);
+                    level[a][b] = block;
+                } else {
+                    level[a][b] = new blockCreator(0, 0, 0, 0);
+                }
             }
         }
-    }
-    this.update = function() {
+    },
+    update: function() {
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j < level[i].length; j++) {
                 level[i][j].update();
             }
         }
-    };
+    }
 }
 
 function blockCreator(x, y, width, height) {
@@ -117,9 +124,9 @@ function blockCreator(x, y, width, height) {
     this.width = width;
     this.height = height;
     this.update = function() {
-        context = gameArea.context;
-        context.fillStyle = "green";
-        context.fillRect(this.x, this.y, this.width, this.height);
+        this.context = gameArea.context;
+        this.context.fillStyle = "green";
+        this.context.fillRect(this.x, this.y, this.width, this.height);
     };
 }
 
@@ -147,11 +154,11 @@ function handleKeyPress(e) {
 function handleKeyRelease(e) {
     if (e.keyCode === 65) {
         keys["left"] = false;
-        isRunning = false;
+        character.isRunning = false;
     }
     if (e.keyCode === 68) {
         keys["right"] = false;
-        isRunning = false;
+        character.isRunning = false;
     }
     if (e.keyCode === 32) {
         keys["jump"] = false;
@@ -220,8 +227,8 @@ function groundCheck(element) {
     let posY = element.y + element.height;
 
     // Check if there is ground colliding with the element (crude check)
-    for (e in level) {
-        for (f in level[e]) {
+    for (let e in level) {
+        for (let f in level[e]) {
             if (posX > level[e][f].x && posX < level[e][f].x + level[e][f].width){
                 if (posY >= level[e][f].y && element.y <= level[e][f].y + level[e][f].height) {
                     element.isAirborne = false;
