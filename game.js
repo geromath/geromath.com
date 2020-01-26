@@ -1,4 +1,4 @@
-import { collisionDetection } from './physics.js';
+import { collisionDetection } from "./physics.js";
 
 let character;
 let mainLevel;
@@ -90,7 +90,7 @@ let level = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 1, 1],
     [0, 0, 0, 0, 0, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 let levelCreator = {
     start: function() {
@@ -98,10 +98,11 @@ let levelCreator = {
             for (let b in level[a]) {
                 if (level[a][b] === 1) {
                     let block = new blockCreator(
-                        gameArea.canvas.width / level[0].length * b, 
-                        gameArea.canvas.height / level.length * a, 
-                        gameArea.canvas.width / level[0].length, 
-                        gameArea.canvas.height / level.length);
+                        (gameArea.canvas.width / level[0].length) * b,
+                        (gameArea.canvas.height / level.length) * a,
+                        gameArea.canvas.width / level[0].length,
+                        gameArea.canvas.height / level.length
+                    );
                     level[a][b] = block;
                 } else {
                     level[a][b] = new blockCreator(0, 0, 0, 0);
@@ -116,7 +117,7 @@ let levelCreator = {
             }
         }
     }
-}
+};
 
 function blockCreator(x, y, width, height) {
     this.x = x;
@@ -180,7 +181,7 @@ function characterController() {
         if (!character.isCrouching) {
             character.isCrouching = true;
             character.height = character.height * 0.6;
-            
+
             if (character.isAirborne) {
                 character.speed = character.speed * 1.125;
             } else {
@@ -229,14 +230,19 @@ function groundCheck(element) {
     // Check if there is ground colliding with the element (crude check)
     for (let e in level) {
         for (let f in level[e]) {
-            if (posX > level[e][f].x && posX < level[e][f].x + level[e][f].width){
-                if (posY >= level[e][f].y && element.y <= level[e][f].y + level[e][f].height) {
+            if (
+                posX > level[e][f].x &&
+                posX < level[e][f].x + level[e][f].width
+            ) {
+                if (
+                    posY >= level[e][f].y &&
+                    element.y <= level[e][f].y + level[e][f].height
+                ) {
                     element.isAirborne = false;
                     element.hasJumped = false;
                     element.y = level[e][f].y - element.height;
                     return;
-                }
-                else {
+                } else {
                     element.isAirborne = true;
                 }
             }
@@ -245,7 +251,7 @@ function groundCheck(element) {
 }
 
 function applyForce(element, direction, force) {
-    let dir = Math.acos(direction)
+    let dir = Math.acos(direction);
     let verticalForce = Math.round(Math.sin(dir) * 100) / 100;
     let horizontalForce = Math.round(Math.cos(dir) * 100) / 100;
 
@@ -253,7 +259,7 @@ function applyForce(element, direction, force) {
     element.gravity += verticalForce * force;
 }
 
-function canMove () {
+function canMove() {
     return true;
 }
 
