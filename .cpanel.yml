@@ -12,3 +12,5 @@ deployment:
         - /bin/cp menu.css $DEPLOYPATH
         - /bin/cp prof.jpg $DEPLOYPATH
         - /bin/cp work.html $DEPLOYPATH
+        - /bin/cp physics.js $DEPLOYPATH
+        - /bin/cp logo.png $DEPLOYPATH
