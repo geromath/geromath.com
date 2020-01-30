@@ -4,37 +4,57 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Geromath</title>
-        <link rel="stylesheet" href="menu.css" />
-        <link rel="stylesheet" href="game.css" />
-        <link rel="icon" type="" href="logo.png">
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="icon" type="" href="logo.png" />
     </head>
     <body>
-        <script type="module" src="game.js"></script>
         <div class="content">
-            <div class="name">
-                Mathias Maagerø Svendsen - Tester CPanel
+            <div class="card">
+                <div class="logo-image">
+                    <img src="img/logo.png" alt="Geromath logo" />
+                </div>
+                <div class="name">
+                    <h2 class="name-first">Mathias Maagerø</h2>
+                    <hr />
+                    <h1 class="name-last">Svendsen</h1>
+                </div>
+                <div class="page-navigation">
+                    <a href="work.html"
+                        ><div class="work page-navigation-box">
+                            <img
+                                src="img/dashboard-24px.svg"
+                                alt="Work icon"
+                                class="about-image page-navigation-box__image"
+                            />
+                        </div>
+                    </a>
+                    <a href="resume.html">
+                        <div class="resume page-navigation-box">
+                            <span class="resume-text page-navigation-box__image"
+                                >CV</span
+                            >
+                        </div>
+                    </a>
+                    <a href="games.html">
+                        <div class="game page-navigation-box">
+                            <img
+                                src="img/controller.png"
+                                alt="Controller icon"
+                                class="game-image page-navigation-box__image"
+                            />
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="github page-navigation-box">
+                            <img
+                                src="img/github-logo.png"
+                                alt="GitHub icon"
+                                class="github-image page-navigation-box__image"
+                            />
+                        </div>
+                    </a>
+                </div>
             </div>
-            <div class="short"></div>
-            <div class="about"></div>
-        </div>
-        <div class="menu" id="menu">
-            <ul class="menu-list">
-                <li class="menu-list-item">
-                    <span class="menu-list-item__text text1">
-                        <a href="#">About</a>
-                    </span>
-                </li>
-                <li class="menu-list-item">
-                    <span class="menu-list-item__text text2">
-                        <a href="cv.html">CV</a>
-                    </span>
-                </li>
-                <li class="menu-list-item">
-                    <span class="menu-list-item__text text3">
-                        <a href="work.html">Work</a>
-                    </span>
-                </li>
-            </ul>
         </div>
     </body>
 </html>
